@@ -1,0 +1,19 @@
+
+
+CREATE COMPUTE MODULE MessageReply_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+
+		------Any Tranformation of the Final Response Message can be written Here----
+		-----------------------------------------------------------------------------
+		
+		-----Any Transformation Logic for Final Error Message in case of Failure can be written Here-----
+		-------------------------------------------------------------------------------------------------
+		SET OutputRoot = InputRoot;
+		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Variables.ResultRoot.BLOB.BLOB;
+		SET OutputLocalEnvironment.Destination.MQ.DestinationData[1].queueName = InputLocalEnvironment.Variables.ResultRoot.MQMD.ReplyToQ;
+		SET OutputLocalEnvironment.Destination.MQ.DestinationData[1].queueManagerName = InputLocalEnvironment.Variables.ResultRoot.MQMD.ReplyToQMgr;
+		RETURN TRUE;
+	END;
+END MODULE;
