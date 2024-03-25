@@ -1,4 +1,4 @@
-
+//This is added just for fun
 
 CREATE FILTER MODULE MainMsgFlow_Filter
 	CREATE FUNCTION Main() RETURNS BOOLEAN
